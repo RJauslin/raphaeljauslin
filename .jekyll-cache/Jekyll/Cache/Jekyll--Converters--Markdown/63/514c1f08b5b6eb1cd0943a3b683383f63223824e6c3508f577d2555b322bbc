@@ -1,0 +1,23 @@
+I"�<p>Hi :wave:</p>
+
+<p>My name is Raphaël Jauslin.  I currently do a PhD thesis at the University of Neuchâtel under the supervision of the Professor Yves Tillé.</p>
+
+<h2 id="studies">Studies</h2>
+
+<p>I did my MSc in applied mathematics at the <a href="https://www.epfl.ch/education/master/programs/applied-mathematics/">Ecole polytechnique fédérale de Lausanne</a>.</p>
+
+<h2 id="research">Research</h2>
+
+<p>My research focuses on sampling theory. I mainly worked on sampling theory for spatial populations but also on methods to find a balanced sample in highly stratified populations.</p>
+
+<p>The methods we have developed are available in two R packages. The packages are <a href="https://cran.r-project.org/web/packages/WaveSampling/">WaveSampling</a> and <a href="https://cran.r-project.org/web/packages/StratifiedSampling/">StratifiedSampling</a>. You can see recent posts for examples of how to use the functions in the packages.</p>
+
+<!-- * [Wave](/wave/) -->
+
+<p>You can also download the latest versions of the packages from my github page.</p>
+
+<h2 id="hobbies">Hobbies</h2>
+
+<p>In my free time, I like to run in the mountain :mount_fuji: or windfoil on Neuchâtel’s lake :surfer:.</p>
+
+:ET

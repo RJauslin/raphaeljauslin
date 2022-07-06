@@ -1,0 +1,142 @@
+I"OR<h2 id="introduction">Introduction</h2>
+
+<p>In this vignette we are going to explain how to use the function <code class="language-plaintext highlighter-rouge">balseq</code> to select a balanced sample.</p>
+
+<h2 id="load-data">Load data</h2>
+<p>We will use the dataset <code class="language-plaintext highlighter-rouge">belgianmunicipalties</code> from the package <code class="language-plaintext highlighter-rouge">sampling</code>. The dataset does not contains any spatial coordinates. Luckily, a <code class="language-plaintext highlighter-rouge">GEOjson</code> is directly available from the <a href="https://hub.arcgis.com/datasets/esribeluxdata::belgium-municipalities-1/about">https://hub.arcgis.com/datasets/esribeluxdata::belgium-municipalities-1/about</a>. We can then transform it into a <code class="language-plaintext highlighter-rouge">sf</code> object and calculate the centroid of the municipalities. We will use these centroid as spatial coordinates to spread the sample over the space.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># to load data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sampling</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">geojsonio</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w"> 
+</span><span class="n">library</span><span class="p">(</span><span class="n">viridis</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rgeos</span><span class="p">)</span><span class="w"> 
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rmapshaper</span><span class="p">)</span><span class="w">
+
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"belgianmunicipalities"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># load geojson directly from the url</span><span class="w">
+</span><span class="n">belg</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geojson_read</span><span class="p">(</span><span class="s2">"https://opendata.arcgis.com/datasets/9589d9e5e5904f1ea8d245b54f51b4fd_0.geojson"</span><span class="p">,</span><span class="n">what</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sp"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># simplify the variable and transform it into a sf object</span><span class="w">
+</span><span class="n">belg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rmapshaper</span><span class="o">::</span><span class="n">ms_simplify</span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">belg</span><span class="p">,</span><span class="n">keep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">coord</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gCentroid</span><span class="p">(</span><span class="n">as</span><span class="p">(</span><span class="n">belg</span><span class="p">,</span><span class="w"> </span><span class="s2">"Spatial"</span><span class="p">),</span><span class="w"> </span><span class="n">byid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># concatenated file</span><span class="w">
+</span><span class="n">Belgium</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">belg</span><span class="p">,</span><span class="n">belgianmunicipalities</span><span class="p">,</span><span class="n">coord</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">Belgium</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; Simple feature collection with 6 features and 26 fields
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 4.216306 ymin: 51.08066 xmax: 4.564865 ymax: 51.37764
+#&gt; Geodetic CRS:  WGS 84
+#&gt;   OBJECTID   ADMUNAFR   ADMUNADU   ADMUNAGE   Communes CODE_INS arrond    Commune   INS Province Arrondiss
+#&gt; 1        1 AARTSELAAR AARTSELAAR AARTSELAAR Aartselaar    11001     11 Aartselaar 11001        1        11
+#&gt; 2        2     ANVERS  ANTWERPEN  ANTWERPEN  Antwerpen    11002     11     Anvers 11002        1        11
+#&gt; 3        3   BOECHOUT   BOECHOUT   BOECHOUT   Boechout    11004     11   Boechout 11004        1        11
+#&gt; 4        4       BOOM       BOOM       BOOM       Boom    11005     11       Boom 11005        1        11
+#&gt; 5        5   BORSBEEK   BORSBEEK   BORSBEEK   Borsbeek    11007     11   Borsbeek 11007        1        11
+#&gt; 6        6 BRASSCHAAT BRASSCHAAT BRASSCHAAT Brasschaat    11008     11 Brasschaat 11008        1        11
+#&gt;    Men04 Women04  Tot04  Men03 Women03  Tot03 Diffmen Diffwom DiffTOT TaxableIncome Totaltaxation averageincome
+#&gt; 1   6971    7169  14140   7010    7243  14253     -39     -74    -113     242104077      74976114         33809
+#&gt; 2 223677  233642 457319 221767  232405 454172    1910    1237    3147    5416418842    1423715652         22072
+#&gt; 3   6027    5927  11954   6005    5942  11947      22     -15       7     167616996      50739035         29453
+#&gt; 4   7640    8066  15706   7535    7952  15487     105     114     219     186075961      46636930         21907
+#&gt; 5   4948    5328  10276   4951    5322  10273      -3       6       3     143225590      40564374         26632
+#&gt; 6  18142   18916  37058  18217   18903  37120     -75      13     -62     533368826     153629397         30574
+#&gt;   medianincome        x        y                       geometry
+#&gt; 1        23901 4.382005 51.13223 MULTIPOLYGON (((4.400451 51...
+#&gt; 2        17226 4.369578 51.26067 MULTIPOLYGON (((4.368136 51...
+#&gt; 3        21613 4.516463 51.16576 MULTIPOLYGON (((4.530071 51...
+#&gt; 4        17537 4.371434 51.09387 MULTIPOLYGON (((4.385267 51...
+#&gt; 5        20739 4.488162 51.19138 MULTIPOLYGON (((4.509002 51...
+#&gt; 6        21523 4.500281 51.30940 MULTIPOLYGON (((4.540815 51...</code></pre></figure>
+
+<p>A <code class="language-plaintext highlighter-rouge">sf</code> object can be directly plotted using the function <code class="language-plaintext highlighter-rouge">geom_sf</code> from the package <code class="language-plaintext highlighter-rouge">ggplot2</code>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Belgium</span><span class="p">,</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">averageincome</span><span class="p">),</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"G"</span><span class="p">)</span><span class="w">
+</span><span class="n">p</span></code></pre></figure>
+
+<p><img src="/figs/sequential_balanced/unnamed-chunk-3-1.png" title="center" alt="center" width="100%" /></p>
+
+<h2 id="inclusion-probabilites">Inclusion probabilites</h2>
+
+<p>Firstly, we define the variable of interest, the auxiliary variables and the inclusion probabilities. We set up here the inclusion probabilities equal with sum equal to 50. i.e. the sample will contain 50 units.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">Belgium</span><span class="p">)</span><span class="w"> </span><span class="c1"># population total</span><span class="w">
+</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="c1"># sample size</span><span class="w">
+
+</span><span class="c1"># variable of interest</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">averageincome</span><span class="w">
+
+</span><span class="c1"># auxiliary variables</span><span class="w">
+</span><span class="n">Xaux</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">Tot04</span><span class="p">,</span><span class="w">
+              </span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">Women04</span><span class="p">,</span><span class="w">
+              </span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">TaxableIncome</span><span class="p">,</span><span class="w">
+              </span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">Diffmen</span><span class="p">,</span><span class="w">
+              </span><span class="n">belgianmunicipalities</span><span class="o">$</span><span class="n">Diffwom</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># inclusion probabilities</span><span class="w">
+</span><span class="n">pik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Xaux</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">pik</span><span class="p">,</span><span class="n">Xaux</span><span class="p">)</span><span class="w"> </span><span class="c1"># add pik to fixed sample size</span><span class="w">
+</span><span class="n">Xspread</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coord</span></code></pre></figure>
+
+<h2 id="balanced-sampling">Balanced sampling</h2>
+
+<p>We can now load the package <code class="language-plaintext highlighter-rouge">StratifiedSampling</code> and use the function <code class="language-plaintext highlighter-rouge">balseq</code> on the variables that we just defined. We can check that our method is selecting effectively a balanced sample by observing if the auxiliary totals are respected compared to a maximal entropy design (also know as conditional Poisson sampling).</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">StratifiedSampling</span><span class="p">)</span><span class="w">
+
+</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">balseq</span><span class="p">(</span><span class="n">pik</span><span class="p">,</span><span class="n">Xaux</span><span class="p">)</span><span class="w">
+</span><span class="n">s_cube</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">samplecube</span><span class="p">(</span><span class="n">Xaux</span><span class="p">,</span><span class="n">pik</span><span class="p">,</span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">s_srs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">srswor</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">TOT</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colSums</span><span class="p">(</span><span class="n">Xaux</span><span class="p">)</span><span class="w">
+</span><span class="n">EST1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colSums</span><span class="p">(</span><span class="n">Xaux</span><span class="p">[</span><span class="n">s</span><span class="p">,]</span><span class="o">/</span><span class="n">pik</span><span class="p">[</span><span class="n">s</span><span class="p">])</span><span class="w">
+</span><span class="n">EST2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colSums</span><span class="p">(</span><span class="n">Xaux</span><span class="p">[</span><span class="n">s_cube</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,]</span><span class="o">/</span><span class="n">pik</span><span class="p">[</span><span class="n">s_cube</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w">
+</span><span class="n">EST3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colSums</span><span class="p">(</span><span class="n">Xaux</span><span class="p">[</span><span class="n">s_srs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,]</span><span class="o">/</span><span class="n">pik</span><span class="p">[</span><span class="n">s_srs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w">
+
+
+</span><span class="m">100</span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">EST1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TOT</span><span class="p">)</span><span class="o">/</span><span class="n">TOT</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;       pik                                                   
+#&gt;  0.000000  4.908396  4.890552  6.873691 14.225213  6.440032</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="m">100</span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">EST2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TOT</span><span class="p">)</span><span class="o">/</span><span class="n">TOT</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;        pik                                                        
+#&gt;   0.000000  -4.068363  -4.153367  -8.105537 -19.212958 -14.508554</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="m">100</span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">EST3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TOT</span><span class="p">)</span><span class="o">/</span><span class="n">TOT</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;       pik                                                   
+#&gt;   0.00000  12.99101  12.52005  12.72183 -13.28123 -21.77427</code></pre></figure>
+
+<h2 id="spread-sampling">Spread sampling</h2>
+
+<p>To add the spatial component, we can simply add the spatial coordinates as a matrix to the argument <code class="language-plaintext highlighter-rouge">Xspread</code> of the function. Here <code class="language-plaintext highlighter-rouge">coord</code> is an output of the function <code class="language-plaintext highlighter-rouge">gCentroid</code> which is by construction an <code class="language-plaintext highlighter-rouge">S4</code> object. To get the <code class="language-plaintext highlighter-rouge">data.frame</code> that are encapsulated inside, we simply use the <code class="language-plaintext highlighter-rouge">@coords</code> operator.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">balseq</span><span class="p">(</span><span class="n">pik</span><span class="p">,</span><span class="w">
+             </span><span class="n">Xaux</span><span class="p">,</span><span class="w">
+             </span><span class="n">Xspread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.matrix</span><span class="p">(</span><span class="n">Xspread</span><span class="o">@</span><span class="n">coords</span><span class="p">))</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Belgium</span><span class="p">,</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Belgium</span><span class="p">[</span><span class="n">s</span><span class="p">,],</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"G"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; Scale for 'fill' is already present. Adding another scale for 'fill', which will replace the existing scale.</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">p</span></code></pre></figure>
+
+<p><img src="/figs/sequential_balanced/unnamed-chunk-6-1.png" title="center" alt="center" width="100%" /></p>
+
+:ET

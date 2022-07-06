@@ -1,0 +1,60 @@
+# main links
+main:
+  - title: "Home"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Resume"
+    url: /assets/CV/ClassicCV.pdf
+  - title: "Publications"
+    url: /publications/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
+
+docs:
+  - title: Posts
+    children:
+      - title: "Wave Sampling"
+        url: /wave/
+      - title: "Statistical Matching"
+        url: /matching/
+      - title: "Sequential Balanced Sampling"
+        url: /balseq/
+      - title: "Deville systematic"
+        url: /deville/
+
+
+#   - title: Customization
+#     children:
+#       - title: "Configuration"
+#         url: /docs/configuration/
+#       - title: "Navigation"
+#         url: /docs/navigation/
+#       - title: "UI Text"
+#         url: /docs/ui-text/
+#       - title: "Authors"
+#         url: /docs/authors/
+#       - title: "Layouts"
+#         url: /docs/layouts/
+
+#   - title: Content
+#     children:
+#       - title: "Working with Posts"
+#         url: /docs/posts/
+#       - title: "Working with Pages"
+#         url: /docs/pages/
+#       - title: "Working with Collections"
+#         url: /docs/collections/
+#       - title: "Helpers"
+#         url: /docs/helpers/
+#       - title: "Utility Classes"
+#         url: /docs/utility-classes/
+
+#   - title: Extras
+#     children:
+#       - title: "Stylesheets"
+#         url: /docs/stylesheets/
+#       - title: "JavaScript"
+#         url: /docs/javascript/

@@ -1,0 +1,707 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Statistical Matching using Optimal Transport - Raphaël Jauslin</title>
+<meta name="description" content="Example of statistical matching using optimal transport.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Raphaël Jauslin">
+<meta property="og:title" content="Statistical Matching using Optimal Transport">
+<meta property="og:url" content="http://localhost:4000/matching/">
+
+
+  <meta property="og:description" content="Example of statistical matching using optimal transport.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-10-19T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/matching/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Raphaël Jauslin",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Raphaël Jauslin Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Raphaël Jauslin
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/assets/CV/ClassicCV.pdf">Resume</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url"></a>
+    </h3>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/wave/">Wave Sampling</a></li>
+          
+            <li><a href="/matching/" class="active">Statistical Matching</a></li>
+          
+            <li><a href="/balseq/">Sequential Balanced Sampling</a></li>
+          
+            <li><a href="/deville/">Deville systematic</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Statistical Matching using Optimal Transport">
+    <meta itemprop="description" content="Example of statistical matching using optimal transport.">
+    <meta itemprop="datePublished" content="2021-10-19T00:00:00+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/matching/" class="u-url" itemprop="url">Statistical Matching using Optimal Transport
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="introduction">Introduction</h2>
+
+<p>In this vignette, we will explain how some functions of the package are used to estimate a contingency table. We will work on the <code class="language-plaintext highlighter-rouge">eusilc</code> dataset of the <code class="language-plaintext highlighter-rouge">laeken</code> package. All the functions presented in the following are explained in the proposed manuscript by Raphaël Jauslin and Yves Tillé (2021) &lt;arXiv:2105.08379&gt;.</p>
+
+<h2 id="contingency-table">Contingency table</h2>
+<p>We will estimate the contingency table when the factor variable which represents the economic status <code class="language-plaintext highlighter-rouge">pl030</code> is crossed with a discretized version of the equivalized household income <code class="language-plaintext highlighter-rouge">eqIncome</code>. To discretize the equivalized income, we calculate percentiles (0.15,0.30,0.45,0.60,0.75,0.90) of the variable and define the category as intervals between the values.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">laeken</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sampling</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">StratifiedSampling</span><span class="p">)</span></code></pre></figure>
+
+<!-- 
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; Warning: le package 'StratifiedSampling' a été compilé avec la version R 4.2.0</code></pre></figure>
+ -->
+
+<!-- 
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; Le chargement a nécessité le package : Matrix</code></pre></figure>
+
+ -->
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span><span class="p">(</span><span class="s2">"eusilc"</span><span class="p">)</span><span class="w">
+</span><span class="n">eusilc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">na.omit</span><span class="p">(</span><span class="n">eusilc</span><span class="p">)</span><span class="w">
+</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">eusilc</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Xm are the matching variables and id are identity of the units</span><span class="w">
+</span><span class="n">Xm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">eusilc</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="s2">"hsize"</span><span class="p">,</span><span class="s2">"db040"</span><span class="p">,</span><span class="s2">"age"</span><span class="p">,</span><span class="s2">"rb090"</span><span class="p">,</span><span class="s2">"pb220a"</span><span class="p">)]</span><span class="w">
+</span><span class="n">Xmcat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">do.call</span><span class="p">(</span><span class="n">cbind</span><span class="p">,</span><span class="n">apply</span><span class="p">(</span><span class="n">Xm</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)],</span><span class="n">MARGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">disjunctive</span><span class="p">))</span><span class="w">
+</span><span class="n">Xm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">Xmcat</span><span class="p">,</span><span class="n">Xm</span><span class="p">[,</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)])</span><span class="w">
+</span><span class="n">id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">rb030</span><span class="w">
+
+
+</span><span class="c1"># categorial income splitted by the percentile</span><span class="w">
+</span><span class="n">c_income</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w">
+</span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0.15</span><span class="p">))</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">2</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(0,15]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">3</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(15,30]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">4</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(30,45]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">5</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(45,60]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">6</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(60,75]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="m">6</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">7</span><span class="p">])]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(75,90]"</span><span class="w">
+</span><span class="n">c_income</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="w">  </span><span class="n">eusilc</span><span class="o">$</span><span class="n">eqIncome</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"(90,100]"</span><span class="w">
+
+</span><span class="c1"># variable of interests</span><span class="w">
+</span><span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">ecostat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eusilc</span><span class="o">$</span><span class="n">pl030</span><span class="p">)</span><span class="w">
+</span><span class="n">Z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">c_income</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c_income</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># put same rownames</span><span class="w">
+</span><span class="n">rownames</span><span class="p">(</span><span class="n">Xm</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="o">&lt;-</span><span class="w"> </span><span class="n">id</span><span class="w">
+
+</span><span class="n">YZ</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">table</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">))</span><span class="w">
+</span><span class="n">addmargins</span><span class="p">(</span><span class="n">YZ</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;        c_income
+#&gt; ecostat (0,15] (15,30] (30,45] (45,60] (60,75] (75,90] (90,100]   Sum
+#&gt;     1      409     616     722     807     935    1025      648  5162
+#&gt;     2      189     181     205     184     165     154       82  1160
+#&gt;     3      137      90      72      75      59      52       33   518
+#&gt;     4      210     159     103      95      74      49       46   736
+#&gt;     5      470     462     492     477     459     435      351  3146
+#&gt;     6       57      25      28      30      17      11       10   178
+#&gt;     7      344     283     194     149     106      91       40  1207
+#&gt;     Sum   1816    1816    1816    1817    1815    1817     1210 12107</code></pre></figure>
+
+<h2 id="sampling-schemes">Sampling schemes</h2>
+
+<p>Here we set up the sampling designs and define all the quantities we will need for the rest of the vignette. The sample is selected with simple random sampling without replacement and the weights are equal to the inverse of the inclusion probabilities.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># size of sample</span><span class="w">
+</span><span class="n">n1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span><span class="w">
+</span><span class="n">n2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">500</span><span class="w">
+
+</span><span class="c1"># samples</span><span class="w">
+</span><span class="n">s1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">srswor</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="w">
+</span><span class="n">s2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">srswor</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># extract matching units</span><span class="w">
+</span><span class="n">X1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Xm</span><span class="p">[</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,]</span><span class="w">
+</span><span class="n">X2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Xm</span><span class="p">[</span><span class="n">s2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,]</span><span class="w">
+  
+</span><span class="c1"># extract variable of interest</span><span class="w">
+</span><span class="n">Y1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,])</span><span class="w">
+</span><span class="n">colnames</span><span class="p">(</span><span class="n">Y1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colnames</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w">
+</span><span class="n">Z2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">s2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">,])</span><span class="w">
+</span><span class="n">colnames</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colnames</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># extract correct identities</span><span class="w">
+</span><span class="n">id1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">id</span><span class="p">[</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">
+</span><span class="n">id2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">id</span><span class="p">[</span><span class="n">s2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">
+  
+</span><span class="c1"># put correct rownames</span><span class="w">
+</span><span class="n">rownames</span><span class="p">(</span><span class="n">Y1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">id1</span><span class="w">
+</span><span class="n">rownames</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">id2</span><span class="w">
+  
+</span><span class="c1"># here weights are inverse of inclusion probabilities</span><span class="w">
+</span><span class="n">d1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="n">n1</span><span class="p">,</span><span class="n">n1</span><span class="p">)</span><span class="w">
+</span><span class="n">d2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">n2</span><span class="p">)</span><span class="w">
+  
+</span><span class="c1"># disjunctive form</span><span class="w">
+</span><span class="n">Y_dis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sampling</span><span class="o">::</span><span class="n">disjunctive</span><span class="p">(</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="w">
+</span><span class="n">Z_dis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sampling</span><span class="o">::</span><span class="n">disjunctive</span><span class="p">(</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span><span class="w">
+  
+</span><span class="n">Y1_dis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Y_dis</span><span class="p">[</span><span class="n">s1</span><span class="w"> </span><span class="o">==</span><span class="m">1</span><span class="p">,]</span><span class="w">
+</span><span class="n">Z2_dis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Z_dis</span><span class="p">[</span><span class="n">s2</span><span class="w"> </span><span class="o">==</span><span class="m">1</span><span class="p">,]</span></code></pre></figure>
+
+<h2 id="harmonization">Harmonization</h2>
+
+<p>Then the harmonization step must be performed. The <code class="language-plaintext highlighter-rouge">harmonize</code> function returns the harmonized weights. If the true population totals are known, it is possible to use these instead of the estimate made within the function.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">re</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">harmonize</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">id1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">id2</span><span class="p">)</span><span class="w">  
+
+</span><span class="c1"># if we want to use the population totals to harmonize we can use </span><span class="w">
+</span><span class="n">re</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">harmonize</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">id1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">id2</span><span class="p">,</span><span class="n">totals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">colSums</span><span class="p">(</span><span class="n">Xm</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">w1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">re</span><span class="o">$</span><span class="n">w1</span><span class="w">
+</span><span class="n">w2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">re</span><span class="o">$</span><span class="n">w2</span><span class="w">
+
+</span><span class="n">colSums</span><span class="p">(</span><span class="n">Xm</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;      1      2      3      4      5      6      7      8      9     10     11 
+#&gt;    476    887   2340    763   1880   1021   2244   1938    558   6263   5844 
+#&gt;     12     13     14  hsize    age 
+#&gt;  11073    283    751  36380 559915</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">colSums</span><span class="p">(</span><span class="n">w1</span><span class="o">*</span><span class="n">X1</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;      1      2      3      4      5      6      7      8      9     10     11 
+#&gt;    476    887   2340    763   1880   1021   2244   1938    558   6263   5844 
+#&gt;     12     13     14  hsize    age 
+#&gt;  11073    283    751  36380 559915</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">colSums</span><span class="p">(</span><span class="n">w2</span><span class="o">*</span><span class="n">X2</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;      1      2      3      4      5      6      7      8      9     10     11 
+#&gt;    476    887   2340    763   1880   1021   2244   1938    558   6263   5844 
+#&gt;     12     13     14  hsize    age 
+#&gt;  11073    283    751  36380 559915</code></pre></figure>
+
+<h2 id="optimal-transport-matching">Optimal transport matching</h2>
+
+<p>The statistical matching is done by using the <code class="language-plaintext highlighter-rouge">otmatch</code> function. The estimation of the contingency table is calculated by extracting the <code class="language-plaintext highlighter-rouge">id1</code> units (respectively <code class="language-plaintext highlighter-rouge">id2</code> units) and by using the function <code class="language-plaintext highlighter-rouge">tapply</code> with the correct weights.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Optimal transport matching</span><span class="w">
+</span><span class="n">object</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">otmatch</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">id1</span><span class="p">,</span><span class="n">X2</span><span class="p">,</span><span class="n">id2</span><span class="p">,</span><span class="n">w1</span><span class="p">,</span><span class="n">w2</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">object</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">])</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;         id1    id2    weight
+#&gt; 702     702 251702 11.509002
+#&gt; 1      1401   1401 13.550397
+#&gt; 2506   2506 194004  8.315938
+#&gt; 2506.1 2506 324205  2.013395
+#&gt; 3001   3001 494702 10.976034
+#&gt; 3602   3602 503002 12.651816</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">Y1_ot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),],</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),])</span><span class="w">
+</span><span class="n">Z2_ot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),],</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),])</span><span class="w">
+</span><span class="n">YZ_ot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tapply</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">weight</span><span class="p">,</span><span class="nf">list</span><span class="p">(</span><span class="n">Y1_ot</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="n">Z2_ot</span><span class="o">$</span><span class="n">z</span><span class="p">),</span><span class="n">sum</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># transform NA into 0</span><span class="w">
+</span><span class="n">YZ_ot</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">YZ_ot</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+
+</span><span class="c1"># result</span><span class="w">
+</span><span class="nf">round</span><span class="p">(</span><span class="n">addmargins</span><span class="p">(</span><span class="n">YZ_ot</span><span class="p">),</span><span class="m">3</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;       (0,15]  (15,30]  (30,45]  (45,60]  (60,75]  (75,90] (90,100]       Sum
+#&gt; 1    908.206  732.717  739.153  768.961  886.744  804.436  505.966  5346.183
+#&gt; 2    229.633  157.397  125.376  231.835  232.178  166.663  105.011  1248.094
+#&gt; 3    111.164  105.834   47.015   68.783   81.041   51.124   51.106   516.067
+#&gt; 4     60.987   66.797  104.289  210.126   76.667   92.290   12.085   623.241
+#&gt; 5    549.988  566.912  482.875  446.948  400.627  362.297  356.626  3166.273
+#&gt; 6      8.577   37.881   14.943   51.063    0.000   10.138    0.000   122.602
+#&gt; 7    176.177  164.798  193.780  190.152  119.938  166.566   73.129  1084.540
+#&gt; Sum 2044.732 1832.336 1707.432 1967.869 1797.195 1653.514 1103.922 12107.000</code></pre></figure>
+
+<h2 id="balanced-sampling">Balanced sampling</h2>
+
+<p>As you can see from the previous section, the optimal transport results generally do not have a one-to-one match, meaning that for every unit in sample 1, we have more than one unit with weights not equal to 0 in sample 2.  The <code class="language-plaintext highlighter-rouge">bsmatch</code> function creates a one-to-one match by selecting a balanced stratified sampling to obtain a data.frame where each unit in sample 1 has only one imputed unit from sample 2.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Balanced Sampling </span><span class="w">
+</span><span class="n">BS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bsmatch</span><span class="p">(</span><span class="n">object</span><span class="p">)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">])</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;         id1    id2    weight
+#&gt; 702     702 251702 11.509002
+#&gt; 1      1401   1401 13.550397
+#&gt; 2506   2506 194004  8.315938
+#&gt; 3001   3001 494702 10.976034
+#&gt; 3602   3602 503002 12.651816
+#&gt; 3901.1 3901 294601 10.970414</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">Y1_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),],</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),])</span><span class="w">
+</span><span class="n">Z2_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),],</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),])</span><span class="w">
+</span><span class="n">YZ_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tapply</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">weight</span><span class="o">/</span><span class="n">BS</span><span class="o">$</span><span class="n">q</span><span class="p">,</span><span class="nf">list</span><span class="p">(</span><span class="n">Y1_bs</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="n">Z2_bs</span><span class="o">$</span><span class="n">z</span><span class="p">),</span><span class="n">sum</span><span class="p">)</span><span class="w">
+</span><span class="n">YZ_bs</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">YZ_bs</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="nf">round</span><span class="p">(</span><span class="n">addmargins</span><span class="p">(</span><span class="n">YZ_bs</span><span class="p">),</span><span class="m">3</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;       (0,15]  (15,30]  (30,45]  (45,60]  (60,75]  (75,90] (90,100]       Sum
+#&gt; 1    950.180  747.323  753.780  706.298  903.800  786.384  498.417  5346.183
+#&gt; 2    202.833  138.314  153.513  220.030  237.620  175.001  120.782  1248.094
+#&gt; 3     93.911   92.113   52.996   78.145   85.264   42.861   70.776   516.067
+#&gt; 4     69.117   58.966  102.611  227.049   68.017   85.771   11.710   623.241
+#&gt; 5    516.973  554.095  495.790  464.549  395.341  331.096  408.429  3166.273
+#&gt; 6      8.367   37.881   14.943   51.274    0.000   10.138    0.000   122.602
+#&gt; 7    171.059  177.551  181.066  213.189  102.669  172.524   66.482  1084.540
+#&gt; Sum 2012.440 1806.244 1754.699 1960.535 1792.710 1603.775 1176.597 12107.000</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># With Z2 as auxiliary information for stratified balanced sampling.</span><span class="w">
+</span><span class="n">BS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bsmatch</span><span class="p">(</span><span class="n">object</span><span class="p">,</span><span class="n">Z2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Y1_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),],</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y1</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">),])</span><span class="w">
+</span><span class="n">Z2_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cbind</span><span class="p">(</span><span class="n">X2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),],</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),])</span><span class="w">
+</span><span class="n">YZ_bs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tapply</span><span class="p">(</span><span class="n">BS</span><span class="o">$</span><span class="n">object</span><span class="o">$</span><span class="n">weight</span><span class="o">/</span><span class="n">BS</span><span class="o">$</span><span class="n">q</span><span class="p">,</span><span class="nf">list</span><span class="p">(</span><span class="n">Y1_bs</span><span class="o">$</span><span class="n">y</span><span class="p">,</span><span class="n">Z2_bs</span><span class="o">$</span><span class="n">z</span><span class="p">),</span><span class="n">sum</span><span class="p">)</span><span class="w">
+</span><span class="n">YZ_bs</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">YZ_bs</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="nf">round</span><span class="p">(</span><span class="n">addmargins</span><span class="p">(</span><span class="n">YZ_bs</span><span class="p">),</span><span class="m">3</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;       (0,15]  (15,30]  (30,45]  (45,60]  (60,75]  (75,90] (90,100]       Sum
+#&gt; 1    916.607  733.295  727.348  783.917  893.807  804.205  487.003  5346.183
+#&gt; 2    215.298  139.840  115.908  246.175  238.891  195.369   96.613  1248.094
+#&gt; 3    105.798  103.158   75.489   55.427   72.337   42.861   60.997   516.067
+#&gt; 4     46.193   70.368  114.037  190.878   91.443   98.613   11.710   623.241
+#&gt; 5    571.876  569.674  459.916  460.539  378.955  356.515  368.799  3166.273
+#&gt; 6      8.367   37.881   14.943   51.274    0.000   10.138    0.000   122.602
+#&gt; 7    186.803  174.473  191.122  180.442  130.024  144.693   76.984  1084.540
+#&gt; Sum 2050.942 1828.688 1698.763 1968.652 1805.457 1652.393 1102.105 12107.000</code></pre></figure>
+
+<h2 id="prediction">Prediction</h2>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># split the weight by id1</span><span class="w">
+</span><span class="n">q_l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">split</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">weight</span><span class="p">,</span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">)</span><span class="w">
+</span><span class="c1"># normalize in each id1</span><span class="w">
+</span><span class="n">q_l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">q_l</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span><span class="n">x</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)})</span><span class="w">
+</span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">do.call</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q_l</span><span class="p">))</span><span class="w">
+  
+</span><span class="n">Z_pred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">disjunctive</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id1</span><span class="p">))</span><span class="o">%*%</span><span class="n">disjunctive</span><span class="p">(</span><span class="n">Z2</span><span class="p">[</span><span class="nf">as.character</span><span class="p">(</span><span class="n">object</span><span class="o">$</span><span class="n">id2</span><span class="p">),])</span><span class="w">
+</span><span class="n">colnames</span><span class="p">(</span><span class="n">Z_pred</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">levels</span><span class="p">(</span><span class="n">factor</span><span class="p">(</span><span class="n">Z2</span><span class="o">$</span><span class="n">c_income</span><span class="p">))</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">Z_pred</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt;         (0,15]   (15,30]    (30,45] (45,60] (60,75] (75,90] (90,100]
+#&gt; [1,] 0.0000000 0.0000000 1.00000000       0       0       0        0
+#&gt; [2,] 0.0000000 0.0000000 0.00000000       1       0       0        0
+#&gt; [3,] 0.1949201 0.8050799 0.00000000       0       0       0        0
+#&gt; [4,] 0.0000000 0.0000000 0.00000000       0       1       0        0
+#&gt; [5,] 0.0000000 0.0000000 1.00000000       0       0       0        0
+#&gt; [6,] 0.7749145 0.1455486 0.07953691       0       0       0        0</code></pre></figure>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-10-19T00:00:00+02:00">October 19, 2021</time></p>
+
+      </footer>
+
+      
+
+      <!-- 
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/wave/" class="pagination--pager" title="Wave Sampling
+">Next</a>
+    
+  </nav>
+ -->
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/deville/" rel="permalink">Deville systematic
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deville’s systematic second-order inclusion probabilities.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/balseq/" rel="permalink">Sequential balanced sampling
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Example of sequential spatially balanced sampling.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/wave/" rel="permalink">Wave Sampling
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Example of weakly associated vector on the Meuse dataset.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Raphaël Jauslin. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

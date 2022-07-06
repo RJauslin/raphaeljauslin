@@ -1,0 +1,517 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Wave Sampling - Raphaël Jauslin</title>
+<meta name="description" content="Example of weakly associated vector on the Meuse dataset.">
+
+
+  <meta name="author" content="Raphaël Jauslin">
+  
+  <meta property="article:author" content="Raphaël Jauslin">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Raphaël Jauslin">
+<meta property="og:title" content="Wave Sampling">
+<meta property="og:url" content="http://localhost:4000/wave/">
+
+
+  <meta property="og:description" content="Example of weakly associated vector on the Meuse dataset.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-10-19T11:11:51+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/wave/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Raphaël Jauslin",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Raphaël Jauslin Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- Mathjax Support -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Raphaël Jauslin
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/assets/CV/ClassicCV.pdf">Resume</a>
+            </li><li class="masthead__menu-item">
+              <a href="/publications/">Publications</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/wave/" class="active">Wave Sampling</a></li>
+          
+            <li><a href="/matching/">Statistical Matching</a></li>
+          
+            <li><a href="/balseq/">Sequential Balanced Sampling</a></li>
+          
+            <li><a href="/deville/">Deville systematic</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Wave Sampling">
+    <meta itemprop="description" content="Example of weakly associated vector on the Meuse dataset.">
+    <meta itemprop="datePublished" content="2021-10-19T11:11:51+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/wave/" class="u-url" itemprop="url">Wave Sampling
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h2 id="introduction">Introduction</h2>
+<p>Geographical data are generally auto-correlated. This is why it is preferable to avoid the measurement of neighboring units. We propose a new method for selecting spread samples from a finite spatial population with equal or unequal inclusion probabilities. The proposed method is called <code class="language-plaintext highlighter-rouge">wave</code> and stands for Weakly Associated Vectors. It is based on the definition of the contiguity structure by using a very dense stratification. The method satisfies exactly the inclusion probabilities and provides samples that are very well spread. This document propose an introduction to understand how to use the function <code class="language-plaintext highlighter-rouge">wave()</code>.</p>
+
+<h2 id="data-generation">Data generation</h2>
+
+<p>We use the data set <code class="language-plaintext highlighter-rouge">meuse</code> from the package <code class="language-plaintext highlighter-rouge">sp</code>, describe by the following statement. <em>This data set gives locations and topsoil heavy metal concentrations, along with a number of soil and landscape variables at the observation locations, collected in a flood plain of the river Meuse, near the village of Stein (NL)</em>. As it is explained by  <a class="citation" href="#grafstrom:tille:2013">(Grafström &amp; Tillé, 2013)</a>, we proposed to generate the inclusion probabilities proportional to the copper concentration, a variable that have a strong spatial correlation.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sampling</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">WaveSampling</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"meuse"</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"meuse.riv"</span><span class="p">)</span><span class="w">
+</span><span class="n">meuse.riv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">meuse.riv</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">meuse.riv</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">334200</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">meuse.riv</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">329400</span><span class="p">),]</span><span class="w">
+</span><span class="n">meuse_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sf</span><span class="p">(</span><span class="n">meuse</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">28992</span><span class="p">,</span><span class="w"> </span><span class="n">agr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"constant"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scale</span><span class="p">(</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">meuse</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]))</span><span class="w">
+</span><span class="n">pik</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">inclusionprobabilities</span><span class="p">(</span><span class="n">meuse</span><span class="o">$</span><span class="n">copper</span><span class="p">,</span><span class="m">30</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="sample-selection">Sample selection</h2>
+
+<p>The sample selection is easily performed by the function <code class="language-plaintext highlighter-rouge">wave()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wave</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pik</span><span class="p">)</span><span class="w">
+</span><span class="nf">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 30</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse_sf</span><span class="p">,</span><span class="n">aes</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">copper</span><span class="p">),</span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'point'</span><span class="p">,</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="n">stroke</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_polygon</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse.riv</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse.riv</span><span class="p">[,</span><span class="m">2</span><span class="p">]),</span><span class="w">
+               </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w">
+               </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightskyblue2"</span><span class="p">,</span><span class="w">
+               </span><span class="n">colour</span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse</span><span class="p">,</span><span class="w">
+             </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copper</span><span class="p">),</span><span class="w">
+             </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+             </span><span class="n">stroke</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">),],</span><span class="w">
+             </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copper</span><span class="p">),</span><span class="w">
+             </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Longitude"</span><span class="p">,</span><span class="w">
+       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Latitude"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w">
+       </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Copper"</span><span class="p">,</span><span class="w">
+       </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_size</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">3.5</span><span class="p">))</span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
+</span><span class="n">p</span></code></pre></figure>
+
+<p><img src="/figs/2021-10-19-wave/unnamed-chunk-3-1.png" alt="center" /></p>
+
+<h2 id="spatial-balance">Spatial balance</h2>
+
+<h3 id="voronoï-polygons">Voronoï polygons</h3>
+<p>One way of measuring the spread of a sample was developed by <a class="citation" href="#stevens:olsen:2004">(Stevens &amp; Olsen, 2004)</a> and then suggested by <a class="citation" href="#grafstrom:lundstrom:2012">(Grafström et al., 2012)</a>. It is based on the Voronoï polygons and is given by</p>
+
+\[B(\bf s) = \frac{1}{n}\sum_{i \in s} (v_i - 1)^2\]
+
+<p>where \(v_i\) is equal to the sum of the inclusion probabilities inside the \(i\)th polygons and \(\bf s\) is the vector of size \(N\) with elements equal 0 or 1. This quantity is implemented in the package <code class="language-plaintext highlighter-rouge">BalancedSampling</code> with the function <code class="language-plaintext highlighter-rouge">sb()</code>. We calculate the values of the \(v_k\) with the function <code class="language-plaintext highlighter-rouge">sb_vk</code>.</p>
+
+<p>The closer \(B(\bf s)\) is to zero, the better is the spatial balance of the sample. Graphically, we obtain the following plot.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sampling</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggvoronoi</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span><span class="p">(</span><span class="s2">"meuse"</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"meuse.area"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sb_vk</span><span class="p">(</span><span class="n">pik</span><span class="p">,</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">meuse</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]),</span><span class="n">s</span><span class="p">)</span><span class="w">
+</span><span class="n">meuse</span><span class="o">$</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">v</span><span class="w">
+
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_voronoi</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">),],</span><span class="w">
+               </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">),</span><span class="w">
+               </span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">meuse.area</span><span class="p">),</span><span class="w">
+               </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">
+               </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse</span><span class="p">,</span><span class="w">
+             </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copper</span><span class="p">),</span><span class="w">
+             </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+             </span><span class="n">stroke</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meuse</span><span class="p">[</span><span class="n">which</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">),],</span><span class="w">
+             </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copper</span><span class="p">),</span><span class="w">
+             </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradient2</span><span class="p">(</span><span class="n">midpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">p</span></code></pre></figure>
+
+<p><img src="/figs/2021-10-19-wave/unnamed-chunk-4-1.png" alt="center" /></p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">BalancedSampling</span><span class="o">::</span><span class="n">sb</span><span class="p">(</span><span class="n">pik</span><span class="p">,</span><span class="n">as.matrix</span><span class="p">(</span><span class="n">meuse</span><span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]),</span><span class="n">which</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; [1] 0.0910097</code></pre></figure>
+
+<h3 id="moran-index">Moran index</h3>
+
+<p>Another way to estimate the spatial spread is developed by @tille:dickson:2018, it uses a corrected version of the traditional Moran’s \(I\) index. This estimator use spatial weights \(w_{ij}\) that indicates how a unit \(i\) is close from the unit \(j\). Such matrix is supposed to include inclusion probabilities in its computation, hence, the spatial weights matrix \(\bf W\) is generally not symmetric. The spatial balance measure is given by</p>
+
+\[I_B =\frac{(\bf s-\bf \bar{s}_w)^\top \bf W (\bf s-\bf \bar{s}_w)}{\sqrt{(\bf s-\bf \bar{s}_w)^\top \bf D (\bf s-\bf \bar{s}_w) (\bf s-\bf \bar{s}_w)^\top \bf B (\bf s-\bf \bar{s}_w) }},\]
+
+<p>where \(\bf D\) is the diagonal matrix containing the \(w_i\),</p>
+
+\[\bf \bar{s}_w = \bf 1 \frac{\bf s^\top \bf W \bf 1}{\bf 1^\top \bf W \bf 1},\]
+
+<p>and</p>
+
+\[\bf B = \bf W^\top \bf D^{-1} \bf W - \frac{\bf W^\top \bf 1\bf 1^\top \bf W}{\bf1^\top \bf W \bf 1}.\]
+
+<p>The Moran’s \(I\) index is implemented in the function <code class="language-plaintext highlighter-rouge">IB()</code>. It is possible to specify your own spatial weights with the argument <code class="language-plaintext highlighter-rouge">W</code>. There is no natural way of defining \(\bf W\), here we propose to consider for each unit only the neighbour such that the sum of the inclusion probabilities of the stratum sum up to 1. It is implemented in the function <code class="language-plaintext highlighter-rouge">wpik()</code>. Another way of estimating the spatial weights is developed by <a class="citation" href="#tille:dickson:2018">(Tillé et al., 2018)</a> and use the inverse of the inclusion probabilities \(1/\pi_i\) to estimate the neighbours of the unit \(i\). It is implemented in the function <code class="language-plaintext highlighter-rouge">wpikInv()</code>. As explain by <a class="citation" href="#tille:dickson:2018">(Tillé et al., 2018)</a> \(w_{ii}\) is supposed to be equal to 0 for all \(i \in U\). By construction the function <code class="language-plaintext highlighter-rouge">wpik</code> does not return the diagonal equal to zero. So if we want to calculate the Moran’s I index with <code class="language-plaintext highlighter-rouge">wpik</code>, we need to subtract the diagonal of the returned matrix.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">W</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wpik</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pik</span><span class="p">)</span><span class="w">
+</span><span class="n">W</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">(</span><span class="n">W</span><span class="p">))</span><span class="w">
+</span><span class="n">IB</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">s</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; [1] -0.4895601</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">W1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wpikInv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pik</span><span class="p">)</span><span class="w">
+</span><span class="n">IB</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">s</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; [1] -0.4554427</code></pre></figure>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="grafstrom:tille:2013">Grafström, A., &amp; Tillé, Y. (2013). Doubly balanced spatial sampling with spreading and restitution of auxiliary totals. <i>Environmetrics</i>, <i>24</i>(2), 120–131. https://doi.org/10.1002/env.2194</span></li>
+<li><span id="stevens:olsen:2004">Stevens, D. L. J., &amp; Olsen, A. R. (2004). Spatially Balanced Sampling of Natural Resources. <i>Journal of the American Statistical Association</i>, <i>99</i>(465), 262–278. https://doi.org/10.1198/016214504000000250</span></li>
+<li><span id="grafstrom:lundstrom:2012">Grafström, A., Lundström, N. L. P., &amp; Schelin, L. (2012). Spatially Balanced Sampling through the Pivotal Method. <i>Biometrics</i>, <i>68</i>(2), 514–520. https://doi.org/10.1111/j.1541-0420.2011.01699.x</span></li>
+<li><span id="tille:dickson:2018">Tillé, Y., Dickson, M. M., Espa, G., &amp; Giuliani, D. (2018). Measuring the spatial balance of a sample: A new measure based on Moran’s I index. <i>Spatial Statistics</i>, <i>23</i>, 182–192. https://doi.org/10.1016/j.spasta.2018.02.001</span></li></ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-10-19T11:11:51+02:00">October 19, 2021</time></p>
+
+      </footer>
+
+      
+
+      <!-- 
+  <nav class="pagination">
+    
+      <a href="/matching/" class="pagination--pager" title="Statistical Matching using Optimal Transport
+">Previous</a>
+    
+    
+      <a href="/balseq/" class="pagination--pager" title="Sequential balanced sampling
+">Next</a>
+    
+  </nav>
+ -->
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/deville/" rel="permalink">Deville systematic
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Deville’s systematic second-order inclusion probabilities.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/balseq/" rel="permalink">Sequential balanced sampling
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Example of sequential spatially balanced sampling.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/matching/" rel="permalink">Statistical Matching using Optimal Transport
+</a>
+      
+    </h2>
+    
+
+
+    <p class="archive__item-excerpt" itemprop="description">Example of statistical matching using optimal transport.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Raphaël Jauslin. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
