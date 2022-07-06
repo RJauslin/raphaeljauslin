@@ -23,7 +23,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Raphaël Jauslin">
 <meta property="og:title" content="Wave Sampling">
-<meta property="og:url" content="http://localhost:4000/wave/">
+<meta property="og:url" content="http://localhost:4000/raphaeljauslin/wave/">
 
 
   <meta property="og:description" content="Example of weakly associated vector on the Meuse dataset.">
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/wave/">
+<link rel="canonical" href="http://localhost:4000/raphaeljauslin/wave/">
 
 
 
@@ -56,7 +56,7 @@
     
       "@type": "Person",
       "name": "Raphaël Jauslin",
-      "url": "http://localhost:4000/"
+      "url": "http://localhost:4000/raphaeljauslin/"
     
   }
 </script>
@@ -71,7 +71,7 @@
 
 
 
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Raphaël Jauslin Feed">
+  <link href="/raphaeljauslin/feed.xml" type="application/atom+xml" rel="alternate" title="Raphaël Jauslin Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -87,7 +87,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/raphaeljauslin/assets/css/main.css">
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
 
@@ -121,18 +121,18 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-        <a class="site-title" href="/">
+        <a class="site-title" href="/raphaeljauslin/">
           Raphaël Jauslin
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/">Home</a>
+              <a href="/raphaeljauslin/">Home</a>
             </li><li class="masthead__menu-item">
-              <a href="/about/">About</a>
+              <a href="/raphaeljauslin/about/">About</a>
             </li><li class="masthead__menu-item">
-              <a href="/assets/CV/ClassicCV.pdf">Resume</a>
+              <a href="/raphaeljauslin/assets/CV/ClassicCV.pdf">Resume</a>
             </li><li class="masthead__menu-item">
-              <a href="/publications/">Publications</a>
+              <a href="/raphaeljauslin/publications/">Publications</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
@@ -179,13 +179,13 @@
         
         <ul>
           
-            <li><a href="/wave/" class="active">Wave Sampling</a></li>
+            <li><a href="/raphaeljauslin/wave/" class="active">Wave Sampling</a></li>
           
-            <li><a href="/matching/">Statistical Matching</a></li>
+            <li><a href="/raphaeljauslin/matching/">Statistical Matching</a></li>
           
-            <li><a href="/balseq/">Sequential Balanced Sampling</a></li>
+            <li><a href="/raphaeljauslin/balseq/">Sequential Balanced Sampling</a></li>
           
-            <li><a href="/deville/">Deville systematic</a></li>
+            <li><a href="/raphaeljauslin/deville/">Deville systematic</a></li>
           
         </ul>
         
@@ -210,7 +210,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/wave/" class="u-url" itemprop="url">Wave Sampling
+            <a href="http://localhost:4000/raphaeljauslin/wave/" class="u-url" itemprop="url">Wave Sampling
 </a>
           </h1>
           
@@ -226,7 +226,7 @@
 
 <h2 id="data-generation">Data generation</h2>
 
-<p>We use the data set <code class="language-plaintext highlighter-rouge">meuse</code> from the package <code class="language-plaintext highlighter-rouge">sp</code>, describe by the following statement. <em>This data set gives locations and topsoil heavy metal concentrations, along with a number of soil and landscape variables at the observation locations, collected in a flood plain of the river Meuse, near the village of Stein (NL)</em>. As it is explained by  <a class="citation" href="#grafstrom:tille:2013">(Grafström &amp; Tillé, 2013)</a>, we proposed to generate the inclusion probabilities proportional to the copper concentration, a variable that have a strong spatial correlation.</p>
+<p>We use the data set <code class="language-plaintext highlighter-rouge">meuse</code> from the package <code class="language-plaintext highlighter-rouge">sp</code>, describe by the following statement. <em>This data set gives locations and topsoil heavy metal concentrations, along with a number of soil and landscape variables at the observation locations, collected in a flood plain of the river Meuse, near the village of Stein (NL)</em>. As it is explained by  <a href="https://doi.org/10.1002/env.2194">Grafstrom and Tillé (2013)</a>, we proposed to generate the inclusion probabilities proportional to the copper concentration, a variable that have a strong spatial correlation.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -276,7 +276,7 @@
 <h2 id="spatial-balance">Spatial balance</h2>
 
 <h3 id="voronoï-polygons">Voronoï polygons</h3>
-<p>One way of measuring the spread of a sample was developed by <a class="citation" href="#stevens:olsen:2004">(Stevens &amp; Olsen, 2004)</a> and then suggested by <a class="citation" href="#grafstrom:lundstrom:2012">(Grafström et al., 2012)</a>. It is based on the Voronoï polygons and is given by</p>
+<p>One way of measuring the spread of a sample was developed by  stevens:olsen:2004 and then suggested by grafstrom:lundstrom:2012. It is based on the Voronoï polygons and is given by</p>
 
 \[B(\bf s) = \frac{1}{n}\sum_{i \in s} (v_i - 1)^2\]
 
@@ -329,7 +329,7 @@
 
 \[\bf B = \bf W^\top \bf D^{-1} \bf W - \frac{\bf W^\top \bf 1\bf 1^\top \bf W}{\bf1^\top \bf W \bf 1}.\]
 
-<p>The Moran’s \(I\) index is implemented in the function <code class="language-plaintext highlighter-rouge">IB()</code>. It is possible to specify your own spatial weights with the argument <code class="language-plaintext highlighter-rouge">W</code>. There is no natural way of defining \(\bf W\), here we propose to consider for each unit only the neighbour such that the sum of the inclusion probabilities of the stratum sum up to 1. It is implemented in the function <code class="language-plaintext highlighter-rouge">wpik()</code>. Another way of estimating the spatial weights is developed by <a class="citation" href="#tille:dickson:2018">(Tillé et al., 2018)</a> and use the inverse of the inclusion probabilities \(1/\pi_i\) to estimate the neighbours of the unit \(i\). It is implemented in the function <code class="language-plaintext highlighter-rouge">wpikInv()</code>. As explain by <a class="citation" href="#tille:dickson:2018">(Tillé et al., 2018)</a> \(w_{ii}\) is supposed to be equal to 0 for all \(i \in U\). By construction the function <code class="language-plaintext highlighter-rouge">wpik</code> does not return the diagonal equal to zero. So if we want to calculate the Moran’s I index with <code class="language-plaintext highlighter-rouge">wpik</code>, we need to subtract the diagonal of the returned matrix.</p>
+<p>The Moran’s \(I\) index is implemented in the function <code class="language-plaintext highlighter-rouge">IB()</code>. It is possible to specify your own spatial weights with the argument <code class="language-plaintext highlighter-rouge">W</code>. There is no natural way of defining \(\bf W\), here we propose to consider for each unit only the neighbour such that the sum of the inclusion probabilities of the stratum sum up to 1. It is implemented in the function <code class="language-plaintext highlighter-rouge">wpik()</code>. Another way of estimating the spatial weights is developed by tille:dickson:2018 and use the inverse of the inclusion probabilities \(1/\pi_i\) to estimate the neighbours of the unit \(i\). It is implemented in the function <code class="language-plaintext highlighter-rouge">wpikInv()</code>. As explain by tille:dickson:2018  \(w_{ii}\) is supposed to be equal to 0 for all \(i \in U\). By construction the function <code class="language-plaintext highlighter-rouge">wpik</code> does not return the diagonal equal to zero. So if we want to calculate the Moran’s I index with <code class="language-plaintext highlighter-rouge">wpik</code>, we need to subtract the diagonal of the returned matrix.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">W</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wpik</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pik</span><span class="p">)</span><span class="w">
 </span><span class="n">W</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">(</span><span class="n">W</span><span class="p">))</span><span class="w">
@@ -342,12 +342,6 @@
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">#&gt; [1] -0.4554427</code></pre></figure>
 
-<h2 id="references">References</h2>
-
-<ol class="bibliography"><li><span id="grafstrom:tille:2013">Grafström, A., &amp; Tillé, Y. (2013). Doubly balanced spatial sampling with spreading and restitution of auxiliary totals. <i>Environmetrics</i>, <i>24</i>(2), 120–131. https://doi.org/10.1002/env.2194</span></li>
-<li><span id="stevens:olsen:2004">Stevens, D. L. J., &amp; Olsen, A. R. (2004). Spatially Balanced Sampling of Natural Resources. <i>Journal of the American Statistical Association</i>, <i>99</i>(465), 262–278. https://doi.org/10.1198/016214504000000250</span></li>
-<li><span id="grafstrom:lundstrom:2012">Grafström, A., Lundström, N. L. P., &amp; Schelin, L. (2012). Spatially Balanced Sampling through the Pivotal Method. <i>Biometrics</i>, <i>68</i>(2), 514–520. https://doi.org/10.1111/j.1541-0420.2011.01699.x</span></li>
-<li><span id="tille:dickson:2018">Tillé, Y., Dickson, M. M., Espa, G., &amp; Giuliani, D. (2018). Measuring the spatial balance of a sample: A new measure based on Moran’s I index. <i>Spatial Statistics</i>, <i>23</i>, 182–192. https://doi.org/10.1016/j.spasta.2018.02.001</span></li></ol>
 
         
       </section>
@@ -368,11 +362,11 @@
       <!-- 
   <nav class="pagination">
     
-      <a href="/matching/" class="pagination--pager" title="Statistical Matching using Optimal Transport
+      <a href="/raphaeljauslin/matching/" class="pagination--pager" title="Statistical Matching using Optimal Transport
 ">Previous</a>
     
     
-      <a href="/balseq/" class="pagination--pager" title="Sequential balanced sampling
+      <a href="/raphaeljauslin/balseq/" class="pagination--pager" title="Sequential balanced sampling
 ">Next</a>
     
   </nav>
@@ -397,7 +391,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/deville/" rel="permalink">Deville systematic
+        <a href="/raphaeljauslin/deville/" rel="permalink">Deville systematic
 </a>
       
     </h2>
@@ -419,7 +413,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/balseq/" rel="permalink">Sequential balanced sampling
+        <a href="/raphaeljauslin/balseq/" rel="permalink">Sequential balanced sampling
 </a>
       
     </h2>
@@ -441,7 +435,7 @@
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/matching/" rel="permalink">Statistical Matching using Optimal Transport
+        <a href="/raphaeljauslin/matching/" rel="permalink">Statistical Matching using Optimal Transport
 </a>
       
     </h2>
@@ -491,7 +485,7 @@
     
 
     
-      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      <li><a href="/raphaeljauslin/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
     
   </ul>
 </div>
@@ -502,7 +496,7 @@
     </div>
 
     
-  <script src="/assets/js/main.min.js"></script>
+  <script src="/raphaeljauslin/assets/js/main.min.js"></script>
 
 
 

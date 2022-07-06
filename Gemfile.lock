@@ -6,13 +6,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    bibtex-ruby (4.4.7)
-      latex-decode (~> 0.0)
-    citeproc (1.0.10)
-      namae (~> 1.0)
-    citeproc-ruby (1.1.14)
-      citeproc (~> 1.0, >= 1.0.9)
-      csl (~> 1.6)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -20,11 +13,6 @@ GEM
     colorator (1.1.0)
     commonmarker (0.23.5)
     concurrent-ruby (1.1.10)
-    csl (1.6.0)
-      namae (~> 1.0)
-      rexml
-    csl-styles (1.0.1.11)
-      csl (~> 1.0)
     dnsruby (1.61.9)
       simpleidn (~> 0.1)
     em-websocket (0.5.3)
@@ -153,11 +141,6 @@ GEM
       rubyzip (>= 1.3.0, < 3.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
-    jekyll-scholar (5.16.0)
-      bibtex-ruby (~> 4.0, >= 4.0.13)
-      citeproc-ruby (~> 1.0)
-      csl-styles (~> 1.0)
-      jekyll (~> 3.0)
     jekyll-seo-tag (2.8.0)
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
@@ -215,7 +198,6 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    latex-decode (0.3.2)
     liquid (4.0.3)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -225,8 +207,14 @@ GEM
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
+    minimal-mistakes-jekyll (4.24.0)
+      jekyll (>= 3.7, < 5.0)
+      jekyll-feed (~> 0.1)
+      jekyll-gist (~> 1.5)
+      jekyll-include-cache (~> 0.1)
+      jekyll-paginate (~> 1.1)
+      jekyll-sitemap (~> 1.3)
     multi_json (1.15.0)
-    namae (1.1.1)
     nokogiri (1.13.6-x64-mingw32)
       racc (~> 1.4)
     octokit (4.25.1)
@@ -273,13 +261,15 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  github-pages
+  github-pages (~> 226)
+  jekyll (~> 3.9.2)
   jekyll-feed
-  jekyll-scholar
   jemoji
+  minimal-mistakes-jekyll
+  tzinfo (~> 2.0.4)
   tzinfo-data
   wdm (~> 0.1.0)
-  webrick (~> 1.7)
+  webrick (~> 1.7.0)
 
 BUNDLED WITH
-   2.3.12
+   2.3.17
