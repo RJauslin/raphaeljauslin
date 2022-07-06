@@ -5,7 +5,7 @@ type: pages
 permalink: /about/
 ---
 
-Hi :wave:
+Hi,
 
 My name is Raphaël Jauslin.  I currently do a PhD thesis at the University of Neuchâtel under the supervision of the Professor Yves Tillé.
 
@@ -25,5 +25,5 @@ You can also download the latest versions of the packages from my github page.
 
 ## Hobbies
 
-In my free time, I like to run in the mountain :mount_fuji: or windfoil on Neuchâtel's lake :surfer:.
+In my free time, I like to run in the mountain or windfoil on Neuchâtel's lake.
 
