@@ -13,7 +13,7 @@ excerpt: Example of sequential spatially balanced sampling.
 ## Introduction
 
 
-In this vignette we are going to explain how to use the function `balseq` to select a balanced sample. 
+In this vignette we are going to explain how to use the function `balseq` to select a balanced sample. To have more details on the method: [arXiv.2112.01164](https://doi.org/10.48550/arXiv.2112.01164).
 
 ## Load data
 We will use the dataset `belgianmunicipalties` from the package `sampling`. The dataset does not contains any spatial coordinates. Luckily, a `GEOjson` is directly available from the [https://hub.arcgis.com/datasets/esribeluxdata::belgium-municipalities-1/about](https://hub.arcgis.com/datasets/esribeluxdata::belgium-municipalities-1/about). We can then transform it into a `sf` object and calculate the centroid of the municipalities. We will use these centroid as spatial coordinates to spread the sample over the space.
@@ -190,13 +190,6 @@ p <- p +
   geom_point(data = Belgium[s,],aes(x = x,y = y),colour = "red")+
   scale_fill_viridis_c(option = "G")
 {% endhighlight %}
-
-
-
-{% highlight text %}
-#> Scale for 'fill' is already present. Adding another scale for 'fill', which will replace the existing scale.
-{% endhighlight %}
-
 
 
 {% highlight r %}

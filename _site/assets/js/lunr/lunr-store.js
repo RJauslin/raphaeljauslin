@@ -12,13 +12,13 @@ var store = [{
         "teaser": null
       },{
         "title": "Sequential balanced sampling",
-        "excerpt":"Introduction In this vignette we are going to explain how to use the function balseq to select a balanced sample. Load data We will use the dataset belgianmunicipalties from the package sampling. The dataset does not contains any spatial coordinates. Luckily, a GEOjson is directly available from the https://hub.arcgis.com/datasets/esribeluxdata::belgium-municipalities-1/about. We...","categories": [],
+        "excerpt":"Introduction In this vignette we are going to explain how to use the function balseq to select a balanced sample. To have more details on the method: arXiv.2112.01164. Load data We will use the dataset belgianmunicipalties from the package sampling. The dataset does not contains any spatial coordinates. Luckily, a...","categories": [],
         "tags": [],
         "url": "/balseq/",
         "teaser": null
       },{
         "title": "Deville systematic",
-        "excerpt":"Introduction The Deville systematic design is a sampling design developed in 1998 by Jean-Claude Deville. The method has similarities with the systematic design but has different properties. cha:12 has shown that Deville systematic and ordered pivotal method are in fact the same underlying sampling design. This vignette shows how to...","categories": [],
+        "excerpt":"Introduction The Deville systematic design is a sampling design developed in 1998 by Jean-Claude Deville. The method has similarities with the systematic design but has different properties. Chauvet (2012) has shown that Deville systematic and ordered pivotal method are in fact the same underlying sampling design. This vignette shows how...","categories": [],
         "tags": [],
         "url": "/deville/",
         "teaser": null
