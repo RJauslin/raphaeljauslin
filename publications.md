@@ -24,7 +24,7 @@ permalink: /publications/
 
 * Jauslin, R., Panahbehagh, B., and Tillé, Y., (2022) Sequential Spatially Balanced Sample, arXiv: [https://doi.org/10.48550/arXiv.2112.01164](https://doi.org/10.48550/arXiv.2112.01164)
 
-* Jauslin, R. and Tillé, Y., (2022) An Efficient Approach for Statistical Matching of Survey Data Trough Calibration, Optimal Transport and Balanced Sampling, arXiv: [https://doi.org/10.48550/arXiv.2105.08379](https://doi.org/10.48550/arXiv.2105.08379)
+* Jauslin, R. and Tillé, Y., (2022) An Efficient Approach for Statistical Matching of Survey Data Through Calibration, Optimal Transport and Balanced Sampling, arXiv: [https://doi.org/10.48550/arXiv.2105.08379](https://doi.org/10.48550/arXiv.2105.08379)
 
 * Jauslin, R., Panahbehagh, B. and Tillé, Y., (2022) Sequential Unequal Probability Sampling For Stream Population, arXiv: [https://doi.org/10.48550/arXiv.2111.08433](https://doi.org/10.48550/arXiv.2111.08433)
 
@@ -33,7 +33,7 @@ permalink: /publications/
 
 * **6-9 June 2022**: Jauslin, R., Panahbehagh, B. and Tillé, Y., ITACOSM 2022 Italian Conference on Survey Methodology, Sequential Spatially Balanced Sample.
 
-* **6-8 September 2021**: Jauslin, R. and Tillé, Y., Swiss Statistics Meeting *Swiss Days of Official Statistics*, An Efficient Approach for Statistical Matching of Survey Data Trough Calibration, Optimal Transport and Balanced Sampling.
+* **6-8 September 2021**: Jauslin, R. and Tillé, Y., Swiss Statistics Meeting *Swiss Days of Official Statistics*, An Efficient Approach for Statistical Matching of Survey Data Through Calibration, Optimal Transport and Balanced Sampling.
 
 * **2-4 December 2020**: Jauslin, R. and Tillé, Y., uRos2020 virutal event, Spatial Spread Sampling Using Weakly Associated Vectors.
 
