@@ -5,7 +5,7 @@ main:
   - title: "About"
     url: /about/
   - title: "Resume"
-    url: /assets/CV/ClassicCV.pdf
+    url: /assets/CV/raphael_cv.pdf
   - title: "Publications"
     url: /publications/
   # - title: "Sample Collections"
